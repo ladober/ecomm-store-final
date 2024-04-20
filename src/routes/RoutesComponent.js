@@ -1,7 +1,15 @@
 import React from "react";
 import { Routes, useRoutes } from "react-router-dom";
-import { HomePage, LoginPage, SignupPage } from "../pages";
+import { HomePage, LoginPage, ProductFormPage, SignupPage } from "../pages";
+import { Layout } from "../components/Layout";
+import { ProtectedRoute } from "./ProtectedRoute";
+import { useUser } from "../hooks";
+import { isUserAdmin } from "../helpers";
+
 export const RoutesComponent = () => {
+  const { userData } = useUser();
+  const isAdmin = isUserAdmin(userData);
+
   return (
     <div>
       {useRoutes([
@@ -14,8 +22,23 @@ export const RoutesComponent = () => {
           element: <SignupPage />,
         },
         {
-          path: "/",
-          element: <HomePage />,
+          element: <Layout />,
+          children: [
+            {
+              path: "/",
+              element: <HomePage />,
+            },
+            {
+              path: "/products/add",
+              element: (
+                <ProtectedRoute hasAccess={isAdmin}>
+                  <ProductFormPage />
+                </ProtectedRoute>
+              ),
+            },
+          ],
+          // path: "/",
+          // element: <HomePage />,
         },
       ])}
     </div>
