@@ -3,6 +3,9 @@ import { useForm, Controller } from "react-hook-form";
 import { loginValidationSchema } from "./loginValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormContainer, Input, Button } from "../../../components/atoms";
+import { useDispatch } from "react-redux";
+import { authenticateUser } from "../../../redux";
+import { useUser } from "../../../hooks";
 
 export const LoginForm = () => {
   const {
@@ -14,7 +17,13 @@ export const LoginForm = () => {
     resolver: yupResolver(loginValidationSchema),
   });
 
-  const onSubmit = (data) => {};
+  const { loading } = useUser();
+
+  const dispatch = useDispatch();
+
+  const onSubmit = (data) => {
+    dispatch(authenticateUser({ formValues: data, isLogin: true }));
+  };
 
   return (
     <div>
@@ -56,7 +65,7 @@ export const LoginForm = () => {
           }}
         />
 
-        <Button onClick={handleSubmit(onSubmit)} disabled={!isValid}>
+        <Button onClick={handleSubmit(onSubmit)} disabled={!isValid || loading}>
           Login
         </Button>
       </FormContainer>
