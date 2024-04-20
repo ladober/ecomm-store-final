@@ -21,6 +21,11 @@ const userSlice = createSlice({
     loading: false,
     error: null,
   },
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(authenticateUser.pending, (state) => {
@@ -38,4 +43,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { clearError } = userSlice.actions;
 export const userReducer = userSlice.reducer;

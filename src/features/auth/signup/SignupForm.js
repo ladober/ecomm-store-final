@@ -6,6 +6,7 @@ import { FormContainer, Input, Button } from "../../../components/atoms";
 import { useDispatch } from "react-redux";
 import { authenticateUser } from "../../../redux";
 import { useUser } from "../../../hooks";
+import { useNavigate } from "react-router-dom";
 export const SignupForm = () => {
   const {
     control,
@@ -16,12 +17,20 @@ export const SignupForm = () => {
     resolver: yupResolver(signupValidationSchema),
   });
 
+  const navigate = useNavigate();
   const { loading } = useUser();
 
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    dispatch(authenticateUser({ formValues: data, isLogin: false }));
+    dispatch(authenticateUser({ formValues: data, isLogin: false }))
+      .unwrap()
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   };
 
   return (
