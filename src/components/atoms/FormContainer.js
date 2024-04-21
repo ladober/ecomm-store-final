@@ -14,12 +14,14 @@ export const FormContainer = ({ children }) => {
   return <StyledFormContainer>{children}</StyledFormContainer>;
 };
 
-export const FormPageContainer = ({ children }) => {
+export const FormPageContainer = ({ children, isProductForm }) => {
   return (
     <StyledContainer>
-      <Link to="/">
-        <img src={LogoImage} alt="product logo" width={150} height={110} />
-      </Link>
+      {!isProductForm && (
+        <Link to="/">
+          <img src={LogoImage} alt="product logo" width={150} height={110} />
+        </Link>
+      )}
       <StyledStack>{children}</StyledStack>
     </StyledContainer>
   );

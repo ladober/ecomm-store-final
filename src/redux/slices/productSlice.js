@@ -16,22 +16,50 @@ export const saveProduct = createAsyncThunk(
   }
 );
 
+export const fetchHomePageProducts = createAsyncThunk(
+  "product/fetchHomePageProducts",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.get("/products");
+      return data;
+    } catch (error) {
+      return rejectWithValue("Error fetching products");
+    }
+  }
+);
+
 const productSlice = createSlice({
   name: "product",
   initialState: {
     loading: false,
     error: null,
+    homePageProducts: [],
   },
 
   extraReducers: (builder) => {
     builder.addCase(saveProduct.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(saveProduct.fulfilled, (state) => {
+    builder.addCase(saveProduct.fulfilled, (state, action) => {
       state.loading = false;
+      state.homePageProducts = action.payload.products;
     });
     builder.addCase(saveProduct.rejected, (state) => {
       state.loading = false;
+    });
+
+    builder.addCase(fetchHomePageProducts.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(fetchHomePageProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.homePageProducts = action.payload.products;
+    });
+
+    builder.addCase(fetchHomePageProducts.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     });
   },
 });

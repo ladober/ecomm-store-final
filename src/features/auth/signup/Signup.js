@@ -1,7 +1,6 @@
 import React from "react";
-import { AuthContainer } from "../components/AuthContainer";
 import { Stack } from "@mui/material";
-import { Snackbar, Text } from "../../../components/atoms";
+import { Snackbar, Text, FormPageContainer } from "../../../components/atoms";
 import { SignupForm } from "./SignupForm";
 import { useUser } from "../../../hooks";
 import { clearError } from "../../../redux";
@@ -11,13 +10,12 @@ export const Signup = () => {
   const { error } = useUser();
   const dispatch = useDispatch();
   return (
-    <>
-      <AuthContainer>
-        <Stack>
-          <Text>Sign up</Text>
-          <SignupForm />
-        </Stack>
-      </AuthContainer>
+    <FormPageContainer isLoginForm={false}>
+      <Stack>
+        <Text>Sign up</Text>
+        <SignupForm />
+      </Stack>
+
       <Snackbar
         message={error}
         onClose={() => {
@@ -25,6 +23,6 @@ export const Signup = () => {
         }}
         severity="error"
       />
-    </>
+    </FormPageContainer>
   );
 };

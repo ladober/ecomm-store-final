@@ -1,6 +1,5 @@
 import React from "react";
-import { Input } from "../components/atoms/Input";
-
+import { Home } from "../features/products/home";
 export const HomePage = () => {
-  return <div>Home Page</div>;
+  return <Home />;
 };

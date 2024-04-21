@@ -7,6 +7,7 @@ import {
   Button,
   FormContainer,
   FormPageContainer,
+  Text,
 } from "../../../components/atoms";
 import FileBase64 from "react-file-base64";
 import { useDispatch } from "react-redux";
@@ -30,7 +31,8 @@ export const ProductForm = () => {
   };
 
   return (
-    <FormPageContainer>
+    <FormPageContainer isProductForm>
+      <Text>Add Product</Text>
       <FormContainer>
         <Controller
           name="name"
