@@ -37,8 +37,6 @@ export const RoutesComponent = () => {
               ),
             },
           ],
-          // path: "/",
-          // element: <HomePage />,
         },
       ])}
     </div>
