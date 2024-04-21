@@ -2,11 +2,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { productFormValidationSchema } from "./productFormValidation";
-import { Input, Button, FormContainer } from "../../../components/atoms";
+import {
+  Input,
+  Button,
+  FormContainer,
+  FormPageContainer,
+} from "../../../components/atoms";
 import FileBase64 from "react-file-base64";
 import { useDispatch } from "react-redux";
 import { saveProduct } from "../../../redux";
-import { FormPageContainer } from "../../../components/atoms/FormContainer";
 
 export const ProductForm = () => {
   const {

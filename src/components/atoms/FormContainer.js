@@ -1,9 +1,9 @@
 import { FormControl, styled, Box, Stack } from "@mui/material";
 import React from "react";
-import { Link } from "../../../components/atoms";
-import LogoImage from "../../../assets/images/syth-logo.png";
+import { Link } from "./Link";
+import LogoImage from "../../assets/images/syth-logo.png";
 
-const StylesFormContainer = styled(FormControl)(() => ({
+const StyledFormContainer = styled(FormControl)(() => ({
   marginTop: "15px",
   display: "flex",
   justifyContent: "center",
@@ -11,14 +11,14 @@ const StylesFormContainer = styled(FormControl)(() => ({
 }));
 
 export const FormContainer = ({ children }) => {
-  return <StylesFormContainer>{children}</StylesFormContainer>;
+  return <StyledFormContainer>{children}</StyledFormContainer>;
 };
 
 export const FormPageContainer = ({ children }) => {
   return (
     <StyledContainer>
       <Link to="/">
-        <img src={LogoImage} alt="site logo" width={150} height={110} />
+        <img src={LogoImage} alt="product logo" width={150} height={110} />
       </Link>
       <StyledStack>{children}</StyledStack>
     </StyledContainer>
