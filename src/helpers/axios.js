@@ -19,12 +19,9 @@ axiosInstance.interceptors.request.use(async (req) => {
     return req;
   }
 
-  const { data } = await axiosInstance.post(
-    "http://localhost:3001/users/refresh",
-    {
-      refresh_token: refreshToken,
-    }
-  );
+  const { data } = await axios.post("http://localhost:3001/users/refresh", {
+    refresh_token: refreshToken,
+  });
 
   const newAccessToken = data.token;
   localStorage.setItem("token", newAccessToken);
