@@ -1,7 +1,7 @@
-import { Card, styled, Grid, Stack, Fab } from "@mui/material";
+import { Card, styled, Grid, Stack } from "@mui/material";
 import React from "react";
 import { Link, Text } from "../../../components/atoms";
-import { FaPlus } from "react-icons/fa6";
+import { ProductCardAction } from "./ProductCardAction";
 
 const StyledImage = styled("img")(() => ({
   objectFit: "cover",
@@ -24,13 +24,6 @@ const StyledCard = styled(Card)(() => ({
   },
 }));
 
-const StyledFab = styled(Fab)(() => ({
-  backgroundColor: "black",
-  "&:hover": {
-    backgroundColor: "green",
-  },
-}));
-
 export const ProductCard = ({ product }) => {
   const { name, image, brand, category, price } = product;
   return (
@@ -48,12 +41,7 @@ export const ProductCard = ({ product }) => {
               ${price}
             </Text>
           </Stack>
-          <StyledFab variant="extended">
-            <FaPlus color="white" style={{ marginRight: 6 }} />
-            <Text color="white" marginRight="10px">
-              add to cart
-            </Text>
-          </StyledFab>
+          <ProductCardAction product={product} />
         </Stack>
       </StyledCard>
     </Grid>

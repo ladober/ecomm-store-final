@@ -3,12 +3,13 @@ import { axiosInstance } from "../../helpers";
 
 export const saveProduct = createAsyncThunk(
   "product/saveProduct",
-  async ({ product, productId }, { rejectWithValue }) => {
+  async ({ product, productId }, { rejectWithValue, dispatch }) => {
     try {
       const method = productId ? "put" : "post";
       const endpoint = productId ? `/products/${productId}` : "/products";
 
       const { data } = await axiosInstance[method](endpoint, { product });
+      dispatch(fetchHomePageProducts);
       return data;
     } catch (error) {
       return rejectWithValue("error");
@@ -34,6 +35,13 @@ const productSlice = createSlice({
     loading: false,
     error: null,
     homePageProducts: [],
+    selectedProduct: null,
+  },
+
+  reducers: {
+    setSelectedProduct: (state, action) => {
+      state.selectedProduct = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -65,3 +73,4 @@ const productSlice = createSlice({
 });
 
 export const productReducer = productSlice.reducer;
+export const { setSelectedProduct } = productSlice.actions;

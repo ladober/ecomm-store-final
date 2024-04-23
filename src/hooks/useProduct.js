@@ -7,8 +7,10 @@ export const useProduct = () => {
 
   const loading = useSelector((state) => state.product.loading);
 
+  const selectedProduct = useSelector((state) => state.product.selectedProduct);
   return {
     loading,
     homePageProducts,
+    selectedProduct,
   };
 };

@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { productFormValidationSchema } from "./productFormValidation";
 import {
@@ -11,7 +11,9 @@ import {
 } from "../../../components/atoms";
 import FileBase64 from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { saveProduct } from "../../../redux";
+import { saveProduct, setSelectedProduct } from "../../../redux";
+import { useProduct } from "../../../hooks";
+import { useNavigate } from "react-router-dom";
 
 export const ProductForm = () => {
   const {
@@ -24,11 +26,36 @@ export const ProductForm = () => {
     mode: "onChange",
   });
 
+  const { selectedProduct } = useProduct();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    dispatch(saveProduct({ product: data, productId: null }));
+    dispatch(saveProduct({ product: data, productId: selectedProduct?._id }))
+      .unwrap()
+      .then(() => {
+        navigate("/");
+      });
   };
+
+  useEffect(() => {
+    if (selectedProduct) {
+      const { name, brand, description, price, category, image } =
+        selectedProduct;
+      setValue("name", name);
+      setValue("brand", brand);
+      setValue("description", description);
+      setValue("price", price);
+      setValue("category", category);
+      setValue("image", image);
+    }
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setSelectedProduct(null));
+    };
+  }, []);
 
   return (
     <FormPageContainer isProductForm>
@@ -37,12 +64,12 @@ export const ProductForm = () => {
         <Controller
           name="name"
           control={control}
-          defaultValue=""
           render={({ field }) => {
-            const { name, onChange } = field;
+            const { name, onChange, value } = field;
             return (
               <Input
                 name={name}
+                value={value}
                 onChange={onChange}
                 helperText={errors.name?.message}
                 error={Boolean(errors.name)}
@@ -55,12 +82,12 @@ export const ProductForm = () => {
         <Controller
           name="description"
           control={control}
-          defaultValue=""
           render={({ field }) => {
-            const { name, onChange } = field;
+            const { name, onChange, value } = field;
             return (
               <Input
                 name={name}
+                value={value}
                 onChange={onChange}
                 helperText={errors.description?.message}
                 error={Boolean(errors.description)}
@@ -73,12 +100,12 @@ export const ProductForm = () => {
         <Controller
           name="brand"
           control={control}
-          defaultValue=""
           render={({ field }) => {
-            const { name, onChange } = field;
+            const { name, onChange, value } = field;
             return (
               <Input
                 name={name}
+                value={value}
                 onChange={onChange}
                 helperText={errors.brand?.message}
                 error={Boolean(errors.brand)}
@@ -91,12 +118,12 @@ export const ProductForm = () => {
         <Controller
           name="category"
           control={control}
-          defaultValue=""
           render={({ field }) => {
-            const { name, onChange } = field;
+            const { name, onChange, value } = field;
             return (
               <Input
                 name={name}
+                value={value}
                 onChange={onChange}
                 helperText={errors.category?.message}
                 error={Boolean(errors.category)}
@@ -109,13 +136,13 @@ export const ProductForm = () => {
         <Controller
           name="price"
           control={control}
-          defaultValue=""
           render={({ field }) => {
-            const { name, onChange } = field;
+            const { name, onChange, value } = field;
             return (
               <Input
                 type="number"
                 name={name}
+                value={value}
                 onChange={onChange}
                 helperText={errors.price?.message}
                 error={Boolean(errors.price)}
