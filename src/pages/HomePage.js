@@ -1,6 +1,6 @@
 import React from "react";
 import { Home } from "../features/products/home";
-import { Link } from "react-router-dom";
+import { Link } from "../components/atoms";
 
 export const HomePage = () => {
   return (

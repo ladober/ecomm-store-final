@@ -11,7 +11,8 @@ import {
 } from "../../../components/atoms";
 import FileBase64 from "react-file-base64";
 import { useDispatch } from "react-redux";
-import { saveProduct, setSelectedProduct } from "../../../redux";
+import { saveProduct } from "../../../redux";
+import { setSelectedProduct } from "../../../redux/slices/productSlice";
 import { useProduct } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 
@@ -43,8 +44,8 @@ export const ProductForm = () => {
       const { name, brand, description, price, category, image } =
         selectedProduct;
       setValue("name", name);
-      setValue("brand", brand);
       setValue("description", description);
+      setValue("brand", brand);
       setValue("price", price);
       setValue("category", category);
       setValue("image", image);

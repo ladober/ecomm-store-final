@@ -7,6 +7,7 @@ const StyledLoadingContainer = styled(Box)(() => ({
   alignItems: "center",
   height: "100%",
 }));
+
 export const Loading = ({ size = 100, color = "success" }) => {
   return (
     <StyledLoadingContainer>

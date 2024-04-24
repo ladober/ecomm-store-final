@@ -1,11 +1,14 @@
 import React from "react";
 import { useUser } from "../../../hooks";
 import { isUserAdmin } from "../../../helpers";
-import { styled, Stack, Fab, Button } from "@mui/material";
-import { Text } from "../../../components/atoms";
+import { styled, Stack, Fab } from "@mui/material";
+import { Text, Button } from "../../../components/atoms";
 import { FaPlus } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
-import { setSelectedProduct } from "../../../redux";
+import {
+  deleteProduct,
+  setSelectedProduct,
+} from "../../../redux/slices/productSlice";
 import { useNavigate } from "react-router-dom";
 
 const StyledFab = styled(Fab)(() => ({
@@ -31,7 +34,13 @@ export const ProductCardAction = ({ product }) => {
         >
           Edit
         </Button>
-        <Button>Delete</Button>
+        <Button
+          onClick={() => {
+            dispatch(deleteProduct({ id: product._id }));
+          }}
+        >
+          Delete
+        </Button>
       </Stack>
     );
 

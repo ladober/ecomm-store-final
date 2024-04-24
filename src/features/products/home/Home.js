@@ -1,6 +1,6 @@
 import React from "react";
 import { useProduct } from "../../../hooks";
-import { LoadingWrapper } from "../../../components/atoms/Loading";
+import { LoadingWrapper } from "../../../components/atoms";
 import { ProductCard, GridContainer } from "../components";
 
 export const Home = () => {
