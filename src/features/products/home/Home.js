@@ -1,10 +1,12 @@
 import React from "react";
 import { useProduct } from "../../../hooks";
 import { LoadingWrapper } from "../../../components/atoms";
-import { ProductCard, GridContainer } from "../components";
+import { GridContainer } from "../components";
+import { ProductCard } from "../components/ProductCard";
 
 export const Home = () => {
   const { loading, homePageProducts } = useProduct();
+
   return (
     <LoadingWrapper isLoading={loading}>
       <GridContainer>

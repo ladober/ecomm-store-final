@@ -9,7 +9,7 @@ export const saveProduct = createAsyncThunk(
       const endpoint = productId ? `/products/${productId}` : "/products";
 
       const { data } = await axiosInstance[method](endpoint, { product });
-      dispatch(fetchHomePageProducts);
+      dispatch(fetchHomePageProducts());
       return data;
     } catch (error) {
       return rejectWithValue("error");
@@ -62,7 +62,7 @@ const productSlice = createSlice({
     });
     builder.addCase(saveProduct.fulfilled, (state, action) => {
       state.loading = false;
-      state.homePageProducts = action.payload.products;
+      // state.homePageProducts = action.payload.products;
     });
     builder.addCase(saveProduct.rejected, (state) => {
       state.loading = false;

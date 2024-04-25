@@ -1,16 +1,18 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
+import { Header } from "./header/Header";
+
 export const Layout = () => {
   return (
     <Grid container sx={{ minHeight: "100vh" }}>
       <Grid item>
-        <h1>This is Header</h1>
+        <Header />
       </Grid>
       <Grid
         item
         sx={{
-          paddingTop: 20,
+          paddingTop: 5,
           minHeight: "100%",
           width: "100%",
           pb: 10,

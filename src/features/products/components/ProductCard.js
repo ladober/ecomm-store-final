@@ -4,6 +4,7 @@ import { Link, Text } from "../../../components/atoms";
 import { ProductCardAction } from "./ProductCardAction";
 
 const StyledImage = styled("img")(() => ({
+  marginTop: 50,
   objectFit: "cover",
   width: "100%",
   height: "311px",
