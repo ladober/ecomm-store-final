@@ -1,4 +1,11 @@
-import { styled, Toolbar, AppBar, Box, Badge, BadgeMark } from "@mui/material";
+import {
+  styled,
+  Toolbar,
+  AppBar,
+  Box,
+  Badge,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useState } from "react";
 import { Button, Link } from "../atoms";
 import { Searchbar } from "./Searchbar";
@@ -18,7 +25,7 @@ const StyledAppBar = styled(AppBar)(() => ({
 const StyledToolbar = styled(Toolbar)(() => ({
   display: "flex",
   width: "100%",
-  justifyContent: "space-between",
+  justifyContent: "space-around",
   paddingTop: 8,
   paddingBottom: 8,
 }));
@@ -27,6 +34,8 @@ export const Header = () => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const { cartItems } = useCart();
+  const isMobileView = useMediaQuery("(max-width:800px)");
+  const [isSearchbarExpanded, setIsSearchBarExpanded] = useState(false);
 
   const cartItemsQuantity = cartItems?.reduce((acc, curr) => {
     return acc + curr.quantity;
@@ -39,7 +48,16 @@ export const Header = () => {
           <Link style={{ color: "white" }} to="/">
             {t("home")}
           </Link>
-          <Searchbar />
+          {!isMobileView && <Searchbar />}
+          {isMobileView && (
+            <Button
+              onClick={() => {
+                setIsSearchBarExpanded((prev) => !prev);
+              }}
+            >
+              <BsCart4 size={32} color="yellow" />
+            </Button>
+          )}
           <Button
             onClick={() => {
               setOpen(true);
@@ -53,6 +71,7 @@ export const Header = () => {
           <UserIcon />
           <LanguageSelect />
         </StyledToolbar>
+        {isMobileView && isSearchbarExpanded && <Searchbar width="100%" />}
         <ProductCategories />
         <CartModal
           open={open}

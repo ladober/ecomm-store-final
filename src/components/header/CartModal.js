@@ -19,19 +19,6 @@ import {
   removeProductFromCart,
 } from "../../redux/slices/cartSlice";
 
-// const styles = {
-//   position: "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: 450,
-//   bgcolor: "background.paper",
-//   borderRadius: 5,
-//   boxShadow: 24,
-//   paddingX: 2,
-//   paddingY: 2,
-// };
-
 const StyledContainer = styled(Box)(() => ({
   position: "absolute",
   top: "50%",

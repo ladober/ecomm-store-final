@@ -6,6 +6,7 @@ import {
   LoginPage,
   ProductFormPage,
   SignupPage,
+  SingleProductPage,
 } from "../pages";
 import { Layout } from "../components/Layout";
 import { ProtectedRoute } from "./ProtectedRoute";
@@ -56,6 +57,11 @@ export const RoutesComponent = () => {
             {
               path: "/products/categories/:category",
               element: <CategoryProductPage />,
+            },
+
+            {
+              path: "/products/categories/:category/:id",
+              element: <SingleProductPage />,
             },
           ],
         },

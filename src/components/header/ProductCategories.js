@@ -4,7 +4,7 @@ import { List, ListItem, styled } from "@mui/material";
 import { Link, Text } from "../atoms";
 
 const StyledListItem = styled(ListItem)(() => ({
-  padding: "5px 0px 3px 15px",
+  paddingLeft: "5px 0px 3px 15px",
   margin: "0px",
 }));
 

@@ -3,3 +3,4 @@ export { SignupPage } from "./SignupPage";
 export { HomePage } from "./HomePage";
 export { ProductFormPage } from "./ProductFormPage";
 export { CategoryProductPage } from "./CategoryProductPage";
+export { SingleProductPage } from "./SingleProductPage";

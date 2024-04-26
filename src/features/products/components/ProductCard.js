@@ -27,11 +27,11 @@ const StyledCard = styled(Card)(() => ({
 }));
 
 export const ProductCard = ({ product }) => {
-  const { name, image, brand, category, price } = product;
+  const { name, image, brand, category, price, id } = product;
   return (
     <Grid item xs={12} sm={12} md={4} lg={3}>
       <StyledCard>
-        <Link>
+        <Link to={`/products/categories/${category}/${id}`}>
           <StyledImage src={image} alt={`${brand}-${name}`} />
         </Link>
 
