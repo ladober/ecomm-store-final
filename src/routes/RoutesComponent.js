@@ -1,6 +1,12 @@
 import React from "react";
 import { Routes, useRoutes } from "react-router-dom";
-import { HomePage, LoginPage, ProductFormPage, SignupPage } from "../pages";
+import {
+  CategoryProductPage,
+  HomePage,
+  LoginPage,
+  ProductFormPage,
+  SignupPage,
+} from "../pages";
 import { Layout } from "../components/Layout";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useUser } from "../hooks";
@@ -28,6 +34,7 @@ export const RoutesComponent = () => {
               path: "/",
               element: <HomePage />,
             },
+
             {
               path: "/products/add",
               element: (
@@ -36,6 +43,7 @@ export const RoutesComponent = () => {
                 </ProtectedRoute>
               ),
             },
+
             {
               path: "/products/:id/edit",
               element: (
@@ -43,6 +51,11 @@ export const RoutesComponent = () => {
                   <ProductFormPage />
                 </ProtectedRoute>
               ),
+            },
+
+            {
+              path: "/products/categories/:category",
+              element: <CategoryProductPage />,
             },
           ],
         },

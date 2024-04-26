@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  isRejectedWithValue,
+} from "@reduxjs/toolkit";
 import { axiosInstance } from "../../helpers";
 
 export const saveProduct = createAsyncThunk(
@@ -29,6 +33,20 @@ export const fetchHomePageProducts = createAsyncThunk(
   }
 );
 
+export const fetchCategoryProducts = createAsyncThunk(
+  "product/fetchCategoryProducts",
+  async ({ category, queryUrl }, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.get(
+        `/products/categories/${category}${queryUrl}`
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue("Error fetching category products");
+    }
+  }
+);
+
 export const deleteProduct = createAsyncThunk(
   "product/deleteProduct",
   async ({ id }, { dispatch, rejectWithValue }) => {
@@ -47,7 +65,10 @@ const productSlice = createSlice({
     loading: false,
     error: null,
     homePageProducts: [],
+    productCategories: [],
+    categoryProducts: [],
     selectedProduct: null,
+    totalPages: 0,
   },
 
   reducers: {
@@ -75,6 +96,7 @@ const productSlice = createSlice({
     builder.addCase(fetchHomePageProducts.fulfilled, (state, action) => {
       state.loading = false;
       state.homePageProducts = action.payload.products;
+      state.productCategories = action.payload.categories;
     });
 
     builder.addCase(fetchHomePageProducts.rejected, (state, action) => {
@@ -83,6 +105,21 @@ const productSlice = createSlice({
     });
 
     builder.addCase(deleteProduct.rejected, (state, action) => {
+      state.error = action.payload;
+    });
+
+    builder.addCase(fetchCategoryProducts.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(fetchCategoryProducts.fulfilled, (state, action) => {
+      state.loading = false;
+      state.categoryProducts = action.payload.products;
+      state.totalpages = action.payload.totalpages;
+    });
+
+    builder.addCase(fetchCategoryProducts.rejected, (state, action) => {
+      state.loading = false;
       state.error = action.payload;
     });
   },

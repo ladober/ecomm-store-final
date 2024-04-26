@@ -22,7 +22,7 @@ export const LanguageSelect = () => {
   return (
     <FormControl sx={{ minWidth: 120, m: 1 }}>
       <Select
-        sx={{ color: "#FF9900", border: "2px solid black" }}
+        sx={{ color: "black", border: "1px solid black" }}
         value={langCode}
         onChange={(e) => {
           setLangCode(e.target.value);

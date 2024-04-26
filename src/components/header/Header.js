@@ -7,6 +7,8 @@ import { LanguageSelect } from "./LanguageSelect";
 import { useTranslation } from "react-i18next";
 import { CartModal } from "./CartModal";
 import { BsCart4 } from "react-icons/bs";
+import { useCart } from "../../hooks";
+import { ProductCategories } from "./ProductCategories";
 
 const StyledAppBar = styled(AppBar)(() => ({
   backgroundColor: "red",
@@ -24,6 +26,12 @@ const StyledToolbar = styled(Toolbar)(() => ({
 export const Header = () => {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
+  const { cartItems } = useCart();
+
+  const cartItemsQuantity = cartItems?.reduce((acc, curr) => {
+    return acc + curr.quantity;
+  }, 0);
+
   return (
     <Box>
       <StyledAppBar>
@@ -36,15 +44,22 @@ export const Header = () => {
             onClick={() => {
               setOpen(true);
             }}
+            disabled={cartItems.length === 0}
           >
-            <Badge badgeContent={10} color="primary">
+            <Badge badgeContent={cartItemsQuantity} color="primary">
               <BsCart4 size={32} color="yellow" />
             </Badge>
           </Button>
           <UserIcon />
           <LanguageSelect />
         </StyledToolbar>
-        <CartModal open={open} setOpen={setOpen} cartItems={[]} />
+        <ProductCategories />
+        <CartModal
+          open={open}
+          setOpen={setOpen}
+          cartItems={cartItems}
+          totalQuantity={cartItemsQuantity}
+        />
       </StyledAppBar>
     </Box>
   );

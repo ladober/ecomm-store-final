@@ -10,6 +10,7 @@ import {
   setSelectedProduct,
 } from "../../../redux/slices/productSlice";
 import { useNavigate } from "react-router-dom";
+import { addToCart } from "../../../redux";
 
 const StyledFab = styled(Fab)(() => ({
   backgroundColor: "black",
@@ -45,7 +46,12 @@ export const ProductCardAction = ({ product }) => {
     );
 
   return (
-    <StyledFab variant="extended">
+    <StyledFab
+      variant="extended"
+      onClick={() => {
+        dispatch(addToCart(product));
+      }}
+    >
       <FaPlus color="white" style={{ marginRight: 6 }} />
       <Text color="white" marginRight="10px">
         add to cart

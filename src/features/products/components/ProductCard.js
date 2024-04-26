@@ -12,8 +12,9 @@ const StyledImage = styled("img")(() => ({
 }));
 
 const StyledCard = styled(Card)(() => ({
+  marginTop: 85,
   minWidth: "320px",
-  height: 450,
+  height: 500,
   backgroundColor: "transparent",
   border: "none",
   padding: "24px",

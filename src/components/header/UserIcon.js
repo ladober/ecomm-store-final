@@ -13,6 +13,13 @@ export const UserIcon = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  const getUserInitials = (userData) => {
+    return userData
+      ? `${userData.firstName.charAt(0).toUpperCase()}${userData.lastName
+          .charAt(0)
+          .toUpperCase()}`
+      : "";
+  };
   return (
     <Box>
       <IconButton
@@ -20,7 +27,7 @@ export const UserIcon = () => {
           setAnchor(e.currentTarget);
         }}
       >
-        <Avatar>VB</Avatar>
+        <Avatar>{getUserInitials(userData)}</Avatar>
       </IconButton>
       <Menu
         anchorEl={anchor}
